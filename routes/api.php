@@ -44,5 +44,5 @@ Route::post('/email/verification-notification', function (Request $request) {
     return response()->json(['message' => 'Verification link sent!']);
 })->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
 
-Route::post("login", [UserController::class, "login"]);
+Route::post("login", [UserController::class, "login"])->name("login");
 
