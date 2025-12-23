@@ -59,7 +59,9 @@ class UserController extends Controller
         $user = User::create($data);
         $token = $user->createToken('api-token')->plainTextToken;
 
-        event(new Registered($user));
+        try {
+            event(new Registered($user));
+        } catch (\Throwable $e) {}
 
         return response()->json([
             'user' => $user,
@@ -101,7 +103,7 @@ class UserController extends Controller
                     unlink($oldPath);
                 }
             }
-            
+
             $newName = uniqid() . '.' . $request->img->extension();
             $request->img->storeAs('user_imgs', $newName, 'public');
 
