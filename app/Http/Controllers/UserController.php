@@ -51,6 +51,7 @@ class UserController extends Controller
         if ($request->hasFile("img")) {
             $newName = uniqid() . '.' . $request->img->extension();
             $request->img->storeAs('user_imgs', $newName, 'public');
+            $data["img"] = $newName;
         }
 
         $user = User::create($data);
