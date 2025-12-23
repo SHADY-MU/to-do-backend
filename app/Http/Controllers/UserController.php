@@ -52,6 +52,8 @@ class UserController extends Controller
             $newName = uniqid() . '.' . $request->img->extension();
             $request->img->storeAs('user_imgs', $newName, 'public');
             $data["img"] = $newName;
+        }else{
+            $data["img"] = "defeult.png";
         }
 
         $user = User::create($data);
