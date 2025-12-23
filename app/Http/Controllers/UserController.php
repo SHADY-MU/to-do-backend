@@ -49,11 +49,8 @@ class UserController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile("img")) {
-            $ext = $request->img->extension();
-            $tmp = $_FILES["img"]["tmp_name"];
-            $newName = uniqid() . "." . $ext;
-            move_uploaded_file($tmp, storage_path("app/public/user_imgs/" . $newName));
-            $data["img"] = $newName;
+            $newName = uniqid() . '.' . $request->img->extension();
+            $request->img->storeAs('user_imgs', $newName, 'public');
         }
 
         $user = User::create($data);
