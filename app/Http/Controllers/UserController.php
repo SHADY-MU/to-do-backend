@@ -25,7 +25,7 @@ class UserController extends Controller
             $tasks = Task::where("user_id", $user->id)->get();
             $user->img = $user->img
                 ? asset("storage/user_imgs/$user->img")
-                : asset("images/default.jpeg");
+                : asset("images/default.png");
 
             return response()->json([
                 "status" => true,
